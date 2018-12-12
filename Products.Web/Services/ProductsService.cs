@@ -2,7 +2,6 @@
 using Products.Data;
 using Products.Data.Models;
 using Products.Web.Services.Interfaces;
-using Products.Web.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +21,15 @@ namespace Products.Web.Services
         {
             var products = this.db.Products
                 .Where(p => p.UserId == userId)
+                .Include(p => p.ProductType)
+                .ToList();
+
+            return products;
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            var products = this.db.Products
                 .Include(p => p.ProductType)
                 .ToList();
 

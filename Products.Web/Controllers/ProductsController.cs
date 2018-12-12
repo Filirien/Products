@@ -9,7 +9,7 @@ using Products.Web.ViewModels;
 
 namespace Products.Web.Controllers
 {
-    [Route("api")]
+    [Route("api/products")]
     public class ProductsController : Controller
     {
         private readonly IProductsService productsService;
@@ -19,15 +19,33 @@ namespace Products.Web.Controllers
             this.productsService = productsService;
         }
 
-        [Route("products/userid/{id}")]
+
         [HttpGet]
-        public IEnumerable<ProductViewModel> Index(int id)
+        public IEnumerable<ProductViewModel> UserProducts (int userId = 0)
         {
-            var products = productsService.GetProductsByUserId(id);
+            var products = productsService.GetProductsByUserId(userId);
             var result = products
                 .Select(p => new ProductViewModel
                 {
                     Id = p.Id,
+                    UserId = p.UserId,
+                    Description = p.Description,
+                    Type = p.ProductType.Description
+                })
+                .ToList();
+
+            return result;
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<ProductViewModel> AllProducts()
+        {
+            var products = productsService.GetAllProducts();
+            var result = products
+                .Select(p => new ProductViewModel
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
                     Description = p.Description,
                     Type = p.ProductType.Description
                 })
