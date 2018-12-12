@@ -12,7 +12,9 @@ import { map } from 'rxjs/operators';
 
 export class UserProductsComponent {
 
-  public products: ProductModel[];
+  products: ProductModel[];
+  searchProducts: ProductModel[];
+  isSearch = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
     //http.get<ProductModel[]>(baseUrl + 'api/products/allproducts')
@@ -25,7 +27,6 @@ export class UserProductsComponent {
     this.http.get<ProductModel[]>(this.baseUrl + 'api/products?userId=' + id)
       .pipe(map(x => x.filter(product => product.userId == id)))
       .subscribe(result => {
-        console.log(result)
         this.products = result;
       }, error => console.error(error));
   }
@@ -44,5 +45,10 @@ export class UserProductsComponent {
 
   sortDescriptionDesc() {
     this.products.sort((a, b) => a.description > b.description ? -1 : 1);
+  }
+
+  search(name: string) {
+    this.searchProducts = this.products.filter(a => a.type.includes(name) || a.description.includes(name));
+    this.isSearch = true;
   }
 }

@@ -1,51 +1,67 @@
-<div>
-  <form (ngSubmit)="onSubmit(form.value.id)" #form="ngForm">
-    <h3>
-      Enter user id:
-      <input [(ngModel)]="id" name="id">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </h3>
-    <div *ngIf="form.value.id != null">
-      <h1>User's products</h1>
+<form (ngSubmit)="onSubmit(form.value.id)" #form="ngForm">
+  <h3>
+    Enter user id:
+    <input [(ngModel)]="id" name="id">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </h3>
 
-      <p *ngIf="!products"><em>Loading...</em></p>
+    
 
-      <table class='table' *ngIf="products">
-        <thead>
-          <tr>
-            <th>
-              Id
-            </th>
+  <div *ngIf="form.value.id != null">
+    <h1>User's products</h1>
 
-            <th>
-              <a [routerLink]="" (click)="sortTypeAsce()">
-                <i class="fa fa-angle-double-down"></i>
-              </a>
-              Type
-              <a [routerLink]="" (click)="sortTypeDesc()">
-                <i class="fa fa-angle-double-up"></i>
-              </a>
-            </th>
+    <p *ngIf="!products"><em>Loading...</em></p>
 
-            <th>
-              <a [routerLink]="" (click)="sortDescriptionAsce()">
-                <i class="fa fa-angle-double-down"></i>
-              </a>
-              Description
-              <a [routerLink]="" (click)="sortDescriptionDesc()">
-                <i class="fa fa-angle-double-up"></i>
-              </a>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let p of products">
-            <td>{{p.id}}</td>
-            <td>{{p.type}}</td>
-            <td>{{p.description}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </form>
-</div>
+    <table class='table' *ngIf="products">
+      <thead>
+        <tr>
+          <th>
+            Id
+          </th>
+
+          <th>
+            <a [routerLink]="" (click)="sortTypeAsce()">
+              <i class="fa fa-angle-double-down"></i>
+            </a>
+            Type
+            <a [routerLink]="" (click)="sortTypeDesc()">
+              <i class="fa fa-angle-double-up"></i>
+            </a>
+          </th>
+
+          <th>
+            <a [routerLink]="" (click)="sortDescriptionAsce()">
+              <i class="fa fa-angle-double-down"></i>
+            </a>
+            Description
+            <a [routerLink]="" (click)="sortDescriptionDesc()">
+              <i class="fa fa-angle-double-up"></i>
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!isSearch">
+        <tr *ngFor="let p of products">
+          <td>{{p.id}}</td>
+          <td>{{p.type}}</td>
+          <td>{{p.description}}</td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="isSearch">
+        <tr *ngFor="let p of searchProducts">
+          <td>{{p.id}}</td>
+          <td>{{p.type}}</td>
+          <td>{{p.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+
+<form #searchForm="ngForm" (submit)="search(searchForm.value.name)">
+  <h3>
+    Search:
+    <input name="name" ngModel>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </h3>
+</form>

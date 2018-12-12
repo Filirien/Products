@@ -22,7 +22,7 @@ import { AllProductsComponent } from './product/all-products/all-products.compon
     FormsModule,
     RouterModule.forRoot([
       { path: 'products', component: UserProductsComponent },
-      { path: 'api/products/allproducts', component: AllProductsComponent }
+      { path: 'allproducts', component: AllProductsComponent }
     ])
   ],
   providers: [ ],
