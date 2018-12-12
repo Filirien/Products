@@ -15,10 +15,10 @@ export class UserProductsComponent {
   public products: ProductModel[];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    http.get<ProductModel[]>(baseUrl + 'api/products/allproducts')
-      .subscribe(result => {
-      this.products = result;
-    }, error => console.error(error));
+    //http.get<ProductModel[]>(baseUrl + 'api/products/allproducts')
+    //  .subscribe(result => {
+    //  this.products = result;
+    //}, error => console.error(error));
   }
 
   onSubmit(id: number = 0) {
