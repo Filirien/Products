@@ -7,22 +7,19 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { UserProductsComponent } from './product/user-products/user-products.component';
-import { AllProductsComponent } from './product/all-products/all-products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    UserProductsComponent,
-    AllProductsComponent
+    UserProductsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'products', component: UserProductsComponent },
-      { path: 'allproducts', component: AllProductsComponent }
+      { path: 'products', component: UserProductsComponent }
     ])
   ],
   providers: [ ],

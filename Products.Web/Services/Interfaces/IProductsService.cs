@@ -6,6 +6,5 @@ namespace Products.Web.Services.Interfaces
     public interface IProductsService
     {
         List<Product> GetProductsByUserId(int userId);
-        List<Product> GetAllProducts();
     }
 }

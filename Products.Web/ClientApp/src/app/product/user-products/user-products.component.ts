@@ -16,12 +16,7 @@ export class UserProductsComponent {
   searchProducts: ProductModel[];
   isSearch = false;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    //http.get<ProductModel[]>(baseUrl + 'api/products/allproducts')
-    //  .subscribe(result => {
-    //  this.products = result;
-    //}, error => console.error(error));
-  }
+  constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   onSubmit(id: number = 0) {
     this.http.get<ProductModel[]>(this.baseUrl + 'api/products?userId=' + id)

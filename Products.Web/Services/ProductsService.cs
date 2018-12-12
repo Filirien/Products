@@ -25,15 +25,6 @@ namespace Products.Web.Services
                 .ToList();
 
             return products;
-        }
-
-        public List<Product> GetAllProducts()
-        {
-            var products = this.db.Products
-                .Include(p => p.ProductType)
-                .ToList();
-
-            return products;
-        }
+        }        
     }
 }
