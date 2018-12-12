@@ -13,8 +13,7 @@ import { map } from 'rxjs/operators';
 export class UserProductsComponent {
 
   products: ProductModel[];
-  searchProducts: ProductModel[];
-  isSearch = false;
+  originalProducts: ProductModel[];
 
   constructor(private route: ActivatedRoute, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
@@ -23,6 +22,7 @@ export class UserProductsComponent {
       .pipe(map(x => x.filter(product => product.userId == id)))
       .subscribe(result => {
         this.products = result;
+        this.originalProducts = result;
       }, error => console.error(error));
   }
 
@@ -43,7 +43,6 @@ export class UserProductsComponent {
   }
 
   search(name: string) {
-    this.searchProducts = this.products.filter(a => a.type.includes(name) || a.description.includes(name));
-    this.isSearch = true;
+    this.products = this.originalProducts.filter(a => a.type.toLowerCase().indexOf(name) != -1 || a.description.toLowerCase().indexOf(name) != -1);
   }
 }

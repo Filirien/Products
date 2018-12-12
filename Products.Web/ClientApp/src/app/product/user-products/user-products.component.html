@@ -40,15 +40,8 @@
           </th>
         </tr>
       </thead>
-      <tbody *ngIf="!isSearch">
+      <tbody>
         <tr *ngFor="let p of products">
-          <td>{{p.id}}</td>
-          <td>{{p.type}}</td>
-          <td>{{p.description}}</td>
-        </tr>
-      </tbody>
-      <tbody *ngIf="isSearch">
-        <tr *ngFor="let p of searchProducts">
           <td>{{p.id}}</td>
           <td>{{p.type}}</td>
           <td>{{p.description}}</td>
@@ -60,7 +53,7 @@
 
 <form #searchForm="ngForm" (submit)="search(searchForm.value.name)">
   <h3>
-    Search:
+    Search by type/description:
     <input name="name" ngModel>
     <button type="submit" class="btn btn-primary">Search</button>
   </h3>
